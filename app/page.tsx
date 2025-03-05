@@ -1,72 +1,17 @@
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import React from "react";
+import Table from "../components/Table";
 
-type PrayerTime = {
-  imsak: string;
-  subuh: string;
-  terbit: string;
-  dhuha: string;
-  dzuhur: string;
-  ashar: string;
-  maghrib: string;
-  isya: string;
-};
-
-type Prayer = {
-  id: string;
-  date: string;
-  time: PrayerTime;
-};
-
-export default async function Page() {
-  const res = await fetch(
-    "https://waktu-sholat.vercel.app/prayer?latitude=-6.8834598966616625&longitude=109.52347296409584",
-    {
-      cache: "no-store",
-    }
-  );
-  const { prayers }: { prayers: Prayer[] } = await res.json();
-  const formatDate = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString("id-ID", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-    });
-  };
-
+const page = () => {
   return (
-    <>
-      <Table>
-        <TableCaption>Made by Prassetiyo Utomo.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Tanggal</TableHead>
-            <TableHead>Imsak</TableHead>
-            <TableHead>Subuh</TableHead>
-            <TableHead>Maghrib</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {prayers.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell className="font-medium">
-                {formatDate(item.date)}
-              </TableCell>
-              <TableCell>{item.time.imsak}</TableCell>
-              <TableCell>{item.time.subuh}</TableCell>
-              <TableCell>{item.time.maghrib}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </>
+    <div className=" w-full bg-gray-800 py-8">
+      <h1 className="text-center font-bold text-4xl p-8 text-white">
+        Jadwal Imsakiyah Kabupaten Pemalang
+      </h1>
+      <div className="md:max-w-[80%] max-w-[90%] flex bg-white rounded-2xl mx-auto my-5 p-5 border-2">
+        <Table />
+      </div>
+    </div>
   );
-}
+};
+
+export default page;
