@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 #Demo
 
-['https://jadwalimsak.vercel.app'](https://jadwalimsak.vercel.app)
+[`jadwalimsak.vercel.app`](https://jadwalimsak.vercel.app)
 
 ## Getting Started
 
