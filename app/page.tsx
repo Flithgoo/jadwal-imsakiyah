@@ -8,6 +8,23 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
+type PrayerTime = {
+  imsak: string;
+  subuh: string;
+  terbit: string;
+  dhuha: string;
+  dzuhur: string;
+  ashar: string;
+  maghrib: string;
+  isya: string;
+};
+
+type Prayer = {
+  id: string;
+  date: string;
+  time: PrayerTime;
+};
+
 export default async function Page() {
   const res = await fetch(
     "https://waktu-sholat.vercel.app/prayer?latitude=-6.8834598966616625&longitude=109.52347296409584",
@@ -15,8 +32,7 @@ export default async function Page() {
       cache: "no-store",
     }
   );
-  const { prayers } = await res.json();
-
+  const { prayers }: { prayers: Prayer[] } = await res.json();
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
     return date.toLocaleDateString("id-ID", {
@@ -39,7 +55,7 @@ export default async function Page() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {prayers.map((item: any) => (
+          {prayers.map((item) => (
             <TableRow key={item.id}>
               <TableCell className="font-medium">
                 {formatDate(item.date)}
